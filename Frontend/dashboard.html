@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Resume CMS</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="dashboard.html" class="brand">Resume CMS Admin</a>
+            <nav class="nav-links" aria-label="Dashboard Navigation">
+                <a href="#overview">Dashboard</a>
+                <a href="#manage-about">About Me</a>
+                <a href="#manage-skills">Skills</a>
+                <a href="#manage-education">Education</a>
+                <a href="#manage-projects">Projects</a>
+                <a href="index.html" target="_blank" rel="noopener noreferrer">Public Site</a>
+                <button type="button" id="logout-btn" class="btn btn-secondary btn-sm">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container dashboard-main">
+        <div id="dash-banner" class="alert" role="status" hidden></div>
+
+        <!-- Dashboard Overview -->
+        <section id="overview" class="section-compact">
+            <h1>Admin Dashboard</h1>
+            <p class="subtitle">Manage your portfolio content stored in SQLite via ResumeAPI.</p>
+
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <span class="stat-label">About Me</span>
+                    <strong id="stat-about" class="stat-value">-</strong>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-label">Skills</span>
+                    <strong id="stat-skills" class="stat-value">0</strong>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-label">Education</span>
+                    <strong id="stat-education" class="stat-value">0</strong>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-label">Projects</span>
+                    <strong id="stat-projects" class="stat-value">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage About Me -->
+        <section id="manage-about" class="section-compact">
+            <h2>Manage About Me</h2>
+            <form id="about-form" class="card">
+                <input type="hidden" id="about-id" />
+
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="about-fullname">Full Name *</label>
+                        <input type="text" id="about-fullname" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="about-headline">Headline</label>
+                        <input type="text" id="about-headline" placeholder="e.g., Software & MES Engineer" />
+                    </div>
+                </div>
+
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="about-location">Location</label>
+                        <input type="text" id="about-location" placeholder="e.g., Penang, Malaysia" />
+                    </div>
+                    <div class="form-group">
+                        <label for="about-email">Email</label>
+                        <input type="email" id="about-email" placeholder="name@example.com" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="about-summary">Summary *</label>
+                    <textarea id="about-summary" rows="4" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="about-save-btn" class="btn btn-primary">Save About Me</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Manage Skills -->
+        <section id="manage-skills" class="section-compact">
+            <h2>Manage Skills</h2>
+            <div class="split-layout">
+                <form id="skill-form" class="card">
+                    <h3 id="skill-form-title">Add Skill</h3>
+                    <input type="hidden" id="skill-id" />
+
+                    <div class="form-group">
+                        <label for="skill-name">Skill Name *</label>
+                        <input type="text" id="skill-name" placeholder="e.g., C#" required />
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="skill-category">Category</label>
+                            <input type="text" id="skill-category" placeholder="e.g., Backend" />
+                        </div>
+                        <div class="form-group">
+                            <label for="skill-order">Display Order</label>
+                            <input type="number" id="skill-order" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Skill</button>
+                        <button type="button" id="skill-cancel-btn" class="btn btn-secondary" hidden>Cancel</button>
+                    </div>
+                </form>
+
+                <div class="card">
+                    <h3>Existing Skills</h3>
+                    <div id="skills-admin-list" class="admin-list">
+                        <p class="muted">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Education -->
+        <section id="manage-education" class="section-compact">
+            <h2>Manage Education</h2>
+            <div class="split-layout">
+                <form id="education-form" class="card">
+                    <h3 id="education-form-title">Add Education</h3>
+                    <input type="hidden" id="education-id" />
+
+                    <div class="form-group">
+                        <label for="edu-institution">Institution *</label>
+                        <input type="text" id="edu-institution" required />
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="edu-degree">Degree *</label>
+                            <input type="text" id="edu-degree" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="edu-field">Field of Study</label>
+                            <input type="text" id="edu-field" />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="edu-start">Start Year *</label>
+                            <input type="number" id="edu-start" placeholder="2019" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="edu-end">End Year (blank if ongoing)</label>
+                            <input type="number" id="edu-end" placeholder="2022" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edu-description">Description</label>
+                        <textarea id="edu-description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Education</button>
+                        <button type="button" id="education-cancel-btn" class="btn btn-secondary" hidden>Cancel</button>
+                    </div>
+                </form>
+
+                <div class="card">
+                    <h3>Existing Education</h3>
+                    <div id="education-admin-list" class="admin-list">
+                        <p class="muted">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Projects -->
+        <section id="manage-projects" class="section-compact">
+            <h2>Manage Projects</h2>
+            <div class="split-layout">
+                <form id="project-form" class="card">
+                    <h3 id="project-form-title">Add Project</h3>
+                    <input type="hidden" id="project-id" />
+
+                    <div class="form-group">
+                        <label for="proj-title">Title *</label>
+                        <input type="text" id="proj-title" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="proj-summary">Summary *</label>
+                        <textarea id="proj-summary" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="proj-tech">Tech Stack</label>
+                            <input type="text" id="proj-tech" placeholder="C#, ASP.NET Core, SQLite" />
+                        </div>
+                        <div class="form-group">
+                            <label for="proj-order">Display Order</label>
+                            <input type="number" id="proj-order" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="proj-repo">Repository URL</label>
+                            <input type="url" id="proj-repo" placeholder="https://github.com/..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="proj-live">Live Demo URL</label>
+                            <input type="url" id="proj-live" placeholder="https://..." />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Project</button>
+                        <button type="button" id="project-cancel-btn" class="btn btn-secondary" hidden>Cancel</button>
+                    </div>
+                </form>
+
+                <div class="card">
+                    <h3>Existing Projects</h3>
+                    <div id="projects-admin-list" class="admin-list">
+                        <p class="muted">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

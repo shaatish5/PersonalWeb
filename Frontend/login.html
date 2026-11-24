@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login | Resume CMS</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="login-page">
+    <main class="login-card" aria-labelledby="login-heading">
+        <div class="login-header">
+            <span class="badge">Administrator Access</span>
+            <h1 id="login-heading">Sign In</h1>
+            <p class="subtitle">Authenticate to manage your portfolio content.</p>
+        </div>
+
+        <form id="login-form" novalidate>
+            <div class="form-group">
+                <label for="email">Admin Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="username"
+                    placeholder="admin@example.com"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    placeholder="Enter your password"
+                    required
+                />
+            </div>
+
+            <div id="login-error" class="alert alert-error" role="alert" hidden></div>
+
+            <button type="submit" id="login-btn" class="btn btn-primary btn-full">
+                Log In
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <a href="index.html">Back to Public Resume</a>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

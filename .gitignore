@@ -1,0 +1,17 @@
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+*.user
+*.suo
+*.cache
+
+*.db
+*.db-shm
+*.db-wal
+
+.env
+appsettings.Development.json
+
+.DS_Store
+Thumbs.db
+.vs/
